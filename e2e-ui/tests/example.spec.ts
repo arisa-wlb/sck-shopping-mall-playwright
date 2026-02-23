@@ -31,4 +31,12 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
   await test.step("กดปุ่ม Search", async () => {
     await page.locator("#search-product-btn").click();
   });
+  //ตรวจสอบว่าพบสินค้า Balance Training Bicycle
+  await test.step("ตรวจว่าพบสินค้า Balance Training Bicycle", async () => {
+    await expect(page.locator("#product-card-name-1")).toContainText("Balance Training Bicycle");
+  });
+  //ตรวจสอบราคาสินค้า Balance Training Bicycle เท่ากันกับ ฿4,314.60
+  await test.step("ตรวจสอบราคาสินค้า Balance Training Bicycle เท่ากันกับ ฿4,314.60", async () => {
+    await expect(page.locator("#product-card-price-1")).toContainText("฿4,314.60");
+  });
 });
