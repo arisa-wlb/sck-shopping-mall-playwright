@@ -76,5 +76,20 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
   await test.step("กดไอคอนตะกร้า", async () => {
     await page.locator("#header-menu-cart-btn").click();
   });
-
+    //ตรวจสอบรายละเอียดสินค้าในตะกร้า
+    await test.step("ตรวจสอบรายละเอียดสินค้าในตะกร้าา", async () => {
+      //ชื่อสินค้า เท่ากันกับ Balance Training Bicycle
+        await expect(page.locator('a[href="/product/1"]'))
+    .toContainText("Balance Training Bicycle");
+      //ราคา เท่ากันกับ ฿12,943.80
+      await expect(page.locator("#product-1-price"))
+        .toContainText("฿12,943.80");
+      //แต้มที่จะได้รับ เท่ากันกับ 129 Points
+      await expect(page.locator("#product-1-point"))
+        .toContainText("129 Points");
+      //ตรวจสอบจำนวนที่เพิ่มเข้าตะกร้า
+      await expect(page.locator("#product-1-quantity-input"))
+      .toHaveValue("3");
+    });
+    
 });
