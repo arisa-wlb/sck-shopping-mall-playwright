@@ -68,5 +68,13 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
   await test.step("กดปุ่ม Add to cart", async () => {
     await page.locator("#product-detail-add-to-cart-btn").click();
   });
+  //ตรวจสอบจำนวนบนไอคอนตะกร้า เท่ากันกับ 1
+  await test.step("ตรวจสอบจำนวนบนไอคอนตะกร้า เท่ากันกับ 1", async () => {
+    await expect(page.locator("#header-menu-cart-badge")).toContainText("1");
+  });
+  //กดที่ไอคอนตะกร้า
+  await test.step("กดไอคอนตะกร้า", async () => {
+    await page.locator("#header-menu-cart-btn").click();
+  });
 
 });
