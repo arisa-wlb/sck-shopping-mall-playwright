@@ -43,4 +43,21 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
   await test.step("กดที่สินค้า Balance Training Bicycle", async () => {
     await page.locator("#product-card-1").click();
   });
+  //ตรวจสอบรายละเอียดสินค้า
+    //ชื่อสินค้าเท่ากันกับ Balance Training Bicycle
+  await test.step("ชื่อสินค้าเท่ากันกับ Balance Training Bicycle", async () => {
+    await expect(page.locator("#product-detail-product-name")).toContainText("Balance Training Bicycle");
+  });
+    //ยี่ห้องของสินค้า เท่ากันกับ SportsFun
+  await test.step("ยี่ห้องของสินค้า เท่ากันกับ SportsFun", async () => {
+    await expect(page.locator("#product-detail-brand")).toContainText("SportsFun");
+  });
+    //ราคาของสินค้า เท่ากันกับ ฿4,314.60
+    await test.step("ราคาของสินค้า เท่ากันกับ ฿4,314.60", async () => {
+      await expect(page.locator("#product-detail-price-thb")).toContainText("฿4,314.60");
+    });
+    //แต้มของสินค้า เท่ากันกับ 43 Points
+    await test.step("แต้มของสินค้า เท่ากันกับ 43 Points", async () => {
+      await expect(page.locator("#product-detail-point")).toContainText("43 Points");
+    });
 });
