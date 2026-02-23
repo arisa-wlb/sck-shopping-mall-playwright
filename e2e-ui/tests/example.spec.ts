@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Login สำเร็จด้วย username เท่ากับ user_70 password เท่ากับ P@ssw0rd ค้นหาสินค้า Balance Training Bicycle สั่งซื้อ 1 ชิ้ิ้น ชำระเงินสำเร็จ', async ({ page }) => {
+test('Login สำเร็จด้วย username เท่ากับ user_70 password เท่ากับ P@ssw0rd ค้นหาสินค้า Balance Training Bicycle สั่งซื้อ 3 ชิ้ิ้น ชำระเงินสำเร็จ', async ({ page }) => {
   //เปิดหน้า Website
   await test.step("เปิด Browser แล้วไปยังหน้าที่จะทดสอบ", async() => {
     await page.goto("http://139.59.225.96/auth/login");
@@ -44,20 +44,24 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
     await page.locator("#product-card-1").click();
   });
   //ตรวจสอบรายละเอียดสินค้า
-    //ชื่อสินค้าเท่ากันกับ Balance Training Bicycle
-  await test.step("ชื่อสินค้าเท่ากันกับ Balance Training Bicycle", async () => {
-    await expect(page.locator("#product-detail-product-name")).toContainText("Balance Training Bicycle");
+  await test.step("ตรวจสอบรายละเอียดสินค้า", async () => {
+    //ชื่อสินค้า เท่ากันกับ Balance Training Bicycle
+    await expect(page.locator("#product-detail-product-name"))
+      .toContainText("Balance Training Bicycle");
+    //ยี่ห้อ เท่ากันกับ SportsFun
+    await expect(page.locator("#product-detail-brand"))
+      .toContainText("SportsFun");
+    //ราคา เท่ากันกับ ฿4,314.60
+    await expect(page.locator("#product-detail-price-thb"))
+      .toContainText("฿4,314.60");
+    //แต้มที่จะได้รับ เท่ากันกับ 43 Points
+    await expect(page.locator("#product-detail-point"))
+      .toContainText("43 Points");
   });
-    //ยี่ห้องของสินค้า เท่ากันกับ SportsFun
-  await test.step("ยี่ห้องของสินค้า เท่ากันกับ SportsFun", async () => {
-    await expect(page.locator("#product-detail-brand")).toContainText("SportsFun");
+  //เพิ่มสินค้าเข้าตะกร้า จำนวน 3 ชิ้น
+  await test.step("เพิ่มสินค้าเข้าตะกร้า จำนวน 3 ชิ้น", async () => {
+    // กดปุ่ม + 
+    await page.locator("#product-detail-quantity-increment-btn").click();
+    await page.locator("#product-detail-quantity-increment-btn").click();
   });
-    //ราคาของสินค้า เท่ากันกับ ฿4,314.60
-    await test.step("ราคาของสินค้า เท่ากันกับ ฿4,314.60", async () => {
-      await expect(page.locator("#product-detail-price-thb")).toContainText("฿4,314.60");
-    });
-    //แต้มของสินค้า เท่ากันกับ 43 Points
-    await test.step("แต้มของสินค้า เท่ากันกับ 43 Points", async () => {
-      await expect(page.locator("#product-detail-point")).toContainText("43 Points");
-    });
 });
