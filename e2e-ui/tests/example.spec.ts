@@ -87,9 +87,15 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
       //แต้มที่จะได้รับ เท่ากันกับ 129 Points
       await expect(page.locator("#product-1-point"))
         .toContainText("129 Points");
-      //ตรวจสอบจำนวนที่เพิ่มเข้าตะกร้า
+      //ตรวจสอบจำนวนที่เพิ่มเข้าตะกร้า เท่ากันกับ 3
       await expect(page.locator("#product-1-quantity-input"))
       .toHaveValue("3");
+      //ตรวจสอบ Subtotal เท่ากันกับ ฿12,943.80
+      // await expect(page.locator("#shopping-cart-subtotal-price"))
+      //   .toContainText("฿12,943.80");
     });
-    
+  //กดปุ่ม Check out
+  await test.step("กดปุ่ม Check out", async () => {
+    await page.locator("#shopping-cart-checkout-btn").click();
+  });
 });
