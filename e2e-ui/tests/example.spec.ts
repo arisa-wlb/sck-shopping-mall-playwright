@@ -64,4 +64,9 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
     await page.locator("#product-detail-quantity-increment-btn").click();
     await page.locator("#product-detail-quantity-increment-btn").click();
   });
+  //กดปุ่ม Add to cart
+  await test.step("กดปุ่ม Add to cart", async () => {
+    await page.locator("#product-detail-add-to-cart-btn").click();
+  });
+
 });
