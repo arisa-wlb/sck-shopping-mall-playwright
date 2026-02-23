@@ -7,7 +7,7 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
     });
     //กรอก User Name
   await test.step("กรอก User Name", async() => {
-    await page.locator("#login-username-input").fill("user-70");
+    await page.locator("#login-username-input").fill("user_70");
   });
   //กรอก Password
     await test.step("กรอก Password", async() => {
@@ -18,5 +18,9 @@ test('Login สำเร็จด้วย username เท่ากับ user_7
     await page.locator("#login-btn").click();
   });
   //ตรวจสอบว่า Login สำเร็จและไปหน้าถัดไป
-
+  await test.step("ตรวจสอบว่า Login สำเร็จ", async () => {
+    await expect(
+      page.getByText(/All Product/i)
+    ).toBeVisible();
+  });
 });
